@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useLinkPreviewAPI } from 'api/useLinkPreviewAPI';
-import { useAPIs } from 'api/useAPIs';
+import { useBookmarksAPIs } from 'api/useBookmarksAPIs';
 import {
   I_BookmarkMetadataDict,
   I_BookmarkMetadataItem,
@@ -32,7 +32,7 @@ export const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqPr
 };
 
 export const useFetchCarousels = () => {
-  const { fetchBookmarks } = useAPIs();
+  const { fetchBookmarks } = useBookmarksAPIs();
   const { fetchOpenGraphData } = useLinkPreviewAPI();
 
   // Fetch metadata for each url in the list

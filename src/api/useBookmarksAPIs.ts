@@ -1,7 +1,7 @@
 import { I_BrowserBookmarkItem } from 'App';
 import { useCallback } from 'react';
 
-export const useAPIs = () => {
+export const useBookmarksAPIs = () => {
   /**
    * Could be used to create/edit bookmarks via LocalStorage or Backend DB API
    */
