@@ -7,6 +7,9 @@ import classNames from 'classnames';
 import styles from './card.module.scss';
 import { Expandable } from 'components/expandable/expandable';
 
+// @TODO Cleanup/remove old card code
+// @TODO Add cool card styling like that found in the weather app from: https://youtu.be/m2Dr4L_Ab14?t=138
+
 // Example bookmark visualizer
 // url: https://chrome.google.com/webstore/detail/visual-bookmarks/jdbgjlehkajddoapdgpdjmlpdalfnenf?hl=en
 

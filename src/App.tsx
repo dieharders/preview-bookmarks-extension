@@ -5,9 +5,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useFetchCarousels } from 'utils/fetch';
-import { I_LinkMetadata, useLinkPreview } from 'utils/useLinkPreview';
 import { Card, ExpandableCard } from 'components/card/card';
+import { useFetchCarousels } from 'hooks/fetch';
+import { I_OpenGraphResponse } from '../functions/types';
 import styles from './App.module.scss';
 
 // window object
@@ -53,7 +53,7 @@ export interface I_BookmarkMetadataItem {
   title: string;
   url?: string;
   type?: string;
-  metadata?: I_LinkMetadata;
+  metadata?: I_OpenGraphResponse;
   dateAdded: number;
   dateGroupModified?: number;
   folder?: T_BookmarkFolder;
@@ -111,17 +111,11 @@ const App = () => {
   const { fetchBrowserBookmarks, fetchMetadata } = useFetchCarousels();
   const [bookmarksMetadata, setBookmarksMetadata] = useState<I_BookmarkMetadataDict>({});
   const [pageLocation, setPageLocation] = useState<I_LocationState>(defaultLocationState);
-  const { fetchOpenGraphData } = useLinkPreview();
 
   // Fetch all data
   useEffect(() => {
     fetchBrowserBookmarks().then((metadata) => setBookmarksMetadata(metadata));
   }, [fetchBrowserBookmarks]);
-
-  // test server-less func
-  useEffect(() => {
-    fetchOpenGraphData('google');
-  }, [fetchOpenGraphData]);
 
   const renderBookmarks = useCallback(() => {
     const onClick = (args: I_OnClick) => {
@@ -172,6 +166,7 @@ const App = () => {
 
   const bookmarkItems = useMemo(() => renderBookmarks, [renderBookmarks]);
 
+  // @TODO Add cool "curvy" background animation from: https://www.youtube.com/watch?v=lPJVi797Uy0&list=WL&index=19&t=187s
   return (
     <div className="App">
       <div className={styles.navContainer}>
