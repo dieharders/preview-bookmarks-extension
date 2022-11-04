@@ -20,8 +20,7 @@ const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqProps) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchOpenGraphData: Handler = async (event, context): Promise<HandlerResponse> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { httpMethod, body, queryStringParameters } = event;
+  const { queryStringParameters } = event;
 
   try {
     const apiKey = process.env.LINK_PREVIEW_KEY;
