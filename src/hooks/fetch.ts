@@ -7,29 +7,7 @@ import {
   I_BrowserBookmarkItem,
 } from 'App';
 
-interface I_FetchReqProps {
-  qurl?: string;
-  fields?: Array<string>;
-  apiKey?: string;
-}
-
 let requestInterval: NodeJS.Timer;
-
-export const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqProps) => {
-  if (!qurl || !apiKey) return;
-
-  const fieldsString = fields.join(',');
-  const requestUrl = `https://api.linkpreview.net/?key=${apiKey}&fields=${fieldsString}&q=${qurl}`;
-  const options: RequestInit = {
-    method: 'GET',
-    cache: 'force-cache',
-    headers: { 'Cache-Control': 'max-age=86400' },
-  };
-  const res = await fetch(requestUrl, options);
-  const data = await res.json();
-
-  return data;
-};
 
 export const useFetchCarousels = () => {
   const { fetchBookmarks } = useBookmarksAPIs();

@@ -1,19 +1,22 @@
 import { Handler, HandlerResponse } from '@netlify/functions';
-import { fetchRequest } from 'actions/fetch';
+import { I_OpenGraphResponse, I_OpenGraphResponseBody } from './types';
+import axios from 'axios';
 
-export interface I_OpenGraphResponse {
-  title: string;
-  description: string;
-  image: string;
-  url: string;
-  error?: number;
+interface I_FetchReqProps {
+  qurl?: string;
+  fields?: Array<string>;
+  apiKey?: string;
 }
 
-export interface I_OpenGraphResponseBody {
-  data?: I_OpenGraphResponse;
-  success: boolean;
-  error?: string;
-}
+const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqProps) => {
+  if (!qurl || !apiKey) return;
+
+  const fieldsString = fields.join(',');
+  const requestUrl = `https://api.linkpreview.net/?key=${apiKey}&fields=${fieldsString}&q=${qurl}`;
+  const { data } = await axios.get(requestUrl);
+
+  return data;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchOpenGraphData: Handler = async (event, context): Promise<HandlerResponse> => {
@@ -23,12 +26,12 @@ const fetchOpenGraphData: Handler = async (event, context): Promise<HandlerRespo
   try {
     const apiKey = process.env.LINK_PREVIEW_KEY;
     const fields = ['title', 'description', 'image', 'url'];
-    const data: I_OpenGraphResponse = await fetchRequest({
+    const response: I_OpenGraphResponse = await fetchRequest({
       qurl: queryStringParameters?.url,
       fields,
       apiKey,
     });
-    const resultBody: I_OpenGraphResponseBody = { success: true, data: data };
+    const resultBody: I_OpenGraphResponseBody = { success: true, data: response };
 
     return {
       statusCode: 200,
