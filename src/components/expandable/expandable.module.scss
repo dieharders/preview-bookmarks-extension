@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+  width: 20rem;
+  height: 19rem;
+
+  &.open {
+    z-index: 1000;
+  }
+}
+
+.contentContainer {
+  display: block;
+  position: absolute;
+  max-width: 10rem;
+  max-height: 26rem;
+  padding: 3rem 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.25);
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+
+  &.open {
+    max-width: 26rem;
+    border-radius: 2rem;
+  }
+}
+
+.contentContainer p {
+  padding-top: 1rem;
+  line-height: 150%;
+}
+
+.expandableContainer {
+  max-height: 0;
+  height: auto;
+  width: 0;
+  opacity: 0;
+  margin: auto;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+
+  &.open {
+    max-height: 26rem;
+    width: inherit;
+    margin-top: 1rem;
+    opacity: 1;
+  }
+}

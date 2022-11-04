@@ -1,0 +1,239 @@
+// Vars
+$card-base: rgb(226, 226, 226);
+$card-hover: white;
+$color-primary: hsl(262, 7%, 46%);
+$color-secondary: hsl(262, 65%, 42%);
+$color-gold: hsl(47, 100%, 50%);
+$text-color-primary: hsl(0, 0%, 35%);
+$text-color-secondary: grey;
+
+// Styles
+.inlineContainer {
+  display: block;
+  position: relative;
+  margin: 2rem;
+}
+
+.container {
+  display: block;
+  position: relative;
+  width: 16rem;
+  max-height: 14rem;
+  overflow: hidden;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.25);
+  background-color: $card-base;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+
+  &:hover {
+    background-color: $card-hover;
+  }
+
+  &.open {
+    max-height: 27rem;
+
+    .label {
+      max-height: 2.5rem;
+    }
+  }
+}
+
+.banner {
+  display: block;
+  position: relative;
+  min-height: 10rem;
+  min-width: 10rem;
+  max-width: 10rem;
+  border-radius: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.image {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.title {
+  display: block;
+  text-transform: uppercase;
+  width: 10rem;
+  min-height: 1.75rem;
+  max-height: 1.75rem;
+  color: $text-color-primary;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  margin: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.open {
+    color: $text-color-secondary;
+    text-align: left;
+    margin-left: 0;
+    width: auto;
+    overflow-wrap: break-word;
+  }
+}
+
+.label {
+  display: block;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  min-height: 1.25rem;
+  max-height: 1.25rem;
+  color: $text-color-secondary;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
+  text-decoration: none;
+  margin: auto;
+  margin-left: 0;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.descrCont {
+  margin-top: 1.25rem;
+}
+
+.descrContainer {
+  opacity: 0;
+  margin-top: 0.25rem;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+
+  &.open {
+    opacity: 1;
+  }
+}
+
+.descr {
+  display: block;
+  position: relative;
+  color: $text-color-primary;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+  max-height: 6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  display: block;
+  position: relative;
+  color: $text-color-primary;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+  max-height: 5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.urlLink {
+  display: block;
+  position: relative;
+  color: $text-color-secondary;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.75rem;
+  text-align: left;
+  margin-top: 0.5rem;
+  width: auto;
+  max-height: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  overflow-wrap: break-word;
+}
+.urlLink:hover {
+  color: whitesmoke;
+  background-color: rgb(118, 117, 131);
+}
+
+.url {
+  display: block;
+  position: relative;
+  color: $text-color-secondary;
+  text-align: left;
+  margin-top: 0.5rem;
+  width: auto;
+  max-height: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  overflow-wrap: break-word;
+  transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  -webkit-transition: all 0.25s ease-out;
+}
+.url:hover {
+  color: whitesmoke;
+  background-color: rgb(118, 117, 131);
+}
+
+.counterContainer {
+  position: relative;
+  display: block;
+  margin-left: 1rem;
+}
+
+.counter {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.75rem 0.1rem rgba(0, 0, 0, 0.25);
+}
+
+.count {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: auto;
+}
+
+.folderCountIcon {
+  fill: $color-gold;
+  margin: auto;
+  margin-right: 0.25rem;
+  height: 1.15rem;
+}
+
+.folderIcon {
+  fill: $color-primary;
+}
+
+.missingIcon {
+  fill: $color-primary;
+}

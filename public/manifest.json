@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Link Gallery",
+  "description": "Navigate and preview bookmarks.",
+  "version": "0.1",
+  "icons": {
+    "16": "/icons/dice-16.png",
+    "48": "/icons/dice-48.png",
+    "128": "/icons/dice-128.png"
+  },
+  "permissions": ["bookmarks"],
+  "chrome_url_overrides": {
+    "bookmarks": "/index.html"
+  }
+}
