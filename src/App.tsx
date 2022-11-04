@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { Card, ExpandableCard } from 'components/card/card';
 import { useFetchCarousels } from 'hooks/fetch';
-import { useLinkPreviewAPI } from 'api/useLinkPreviewAPI';
 import { I_OpenGraphResponse } from '../functions/types';
 import styles from './App.module.scss';
 
@@ -112,17 +111,11 @@ const App = () => {
   const { fetchBrowserBookmarks, fetchMetadata } = useFetchCarousels();
   const [bookmarksMetadata, setBookmarksMetadata] = useState<I_BookmarkMetadataDict>({});
   const [pageLocation, setPageLocation] = useState<I_LocationState>(defaultLocationState);
-  const { fetchOpenGraphData } = useLinkPreviewAPI();
 
   // Fetch all data
   useEffect(() => {
     fetchBrowserBookmarks().then((metadata) => setBookmarksMetadata(metadata));
   }, [fetchBrowserBookmarks]);
-
-  // test server-less func
-  useEffect(() => {
-    fetchOpenGraphData('https://www.google.com');
-  }, [fetchOpenGraphData]);
 
   const renderBookmarks = useCallback(() => {
     const onClick = (args: I_OnClick) => {
@@ -173,6 +166,7 @@ const App = () => {
 
   const bookmarkItems = useMemo(() => renderBookmarks, [renderBookmarks]);
 
+  // @TODO Add cool "curvy" background animation from: https://www.youtube.com/watch?v=lPJVi797Uy0&list=WL&index=19&t=187s
   return (
     <div className="App">
       <div className={styles.navContainer}>

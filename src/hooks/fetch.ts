@@ -35,7 +35,6 @@ export const useFetchCarousels = () => {
         const item = data?.[itemId];
         if (!item?.url) return;
         // Get metadata
-        // @TODO Also use screenshot api service if no `image` returned: https://www.savepage.io/#pricing
         const response = await fetchOpenGraphData(item?.url);
         const metadata = response?.data;
         if (!metadata) return;

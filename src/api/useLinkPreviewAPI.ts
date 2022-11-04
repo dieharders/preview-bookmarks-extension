@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { I_OpenGraphResponseBody } from '../../functions/types';
 
+// @TODO Also use screenshot api service if no `image` returned: https://www.savepage.io/#pricing
 export const useLinkPreviewAPI = () => {
   const fetchOpenGraphData = useCallback(
     async (url: string): Promise<I_OpenGraphResponseBody | null> => {
