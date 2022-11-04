@@ -5,9 +5,10 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useFetchCarousels } from 'utils/fetch';
-import { I_LinkMetadata, useLinkPreview } from 'utils/useLinkPreview';
 import { Card, ExpandableCard } from 'components/card/card';
+import { useFetchCarousels } from 'utils/fetch';
+import { useLinkPreviewAPI } from 'utils/useLinkPreviewAPI';
+import { I_OpenGraphResponse } from '../functions/fetchOpenGraphData';
 import styles from './App.module.scss';
 
 // window object
@@ -53,7 +54,7 @@ export interface I_BookmarkMetadataItem {
   title: string;
   url?: string;
   type?: string;
-  metadata?: I_LinkMetadata;
+  metadata?: I_OpenGraphResponse;
   dateAdded: number;
   dateGroupModified?: number;
   folder?: T_BookmarkFolder;
@@ -111,7 +112,7 @@ const App = () => {
   const { fetchBrowserBookmarks, fetchMetadata } = useFetchCarousels();
   const [bookmarksMetadata, setBookmarksMetadata] = useState<I_BookmarkMetadataDict>({});
   const [pageLocation, setPageLocation] = useState<I_LocationState>(defaultLocationState);
-  const { fetchOpenGraphData } = useLinkPreview();
+  const { fetchOpenGraphData } = useLinkPreviewAPI();
 
   // Fetch all data
   useEffect(() => {
@@ -120,7 +121,7 @@ const App = () => {
 
   // test server-less func
   useEffect(() => {
-    fetchOpenGraphData('google');
+    fetchOpenGraphData('https://www.google.com');
   }, [fetchOpenGraphData]);
 
   const renderBookmarks = useCallback(() => {

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useLinkPreview } from 'utils/useLinkPreview';
+import { useLinkPreviewAPI } from 'utils/useLinkPreviewAPI';
 import { useAPIs } from 'utils/useAPIs';
 import {
   I_BookmarkMetadataDict,
@@ -8,14 +8,16 @@ import {
 } from 'App';
 
 interface I_FetchReqProps {
-  qurl: string;
+  qurl?: string;
   fields?: Array<string>;
-  apiKey: string;
+  apiKey?: string;
 }
 
-let requestInterval: any;
+let requestInterval: NodeJS.Timer;
 
 export const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqProps) => {
+  if (!qurl || !apiKey) return;
+
   const fieldsString = fields.join(',');
   const requestUrl = `https://api.linkpreview.net/?key=${apiKey}&fields=${fieldsString}&q=${qurl}`;
   const options: RequestInit = {
@@ -31,7 +33,7 @@ export const fetchRequest = async ({ qurl, fields = [''], apiKey }: I_FetchReqPr
 
 export const useFetchCarousels = () => {
   const { fetchBookmarks } = useAPIs();
-  const { fetchLinkMetaData } = useLinkPreview();
+  const { fetchOpenGraphData } = useLinkPreviewAPI();
 
   // Fetch metadata for each url in the list
   const fetchMetadata = useCallback(
@@ -49,22 +51,15 @@ export const useFetchCarousels = () => {
       });
       let count = 0;
       let state = data; // track mutated state
-      // @TODO Also use screenshot api service: https://www.savepage.io/#pricing
-      const getLinkPreview = async (url: string | undefined) => {
-        if (!url) return undefined;
 
-        const response = await fetchLinkMetaData({ url }).then((res) =>
-          !res.error ? res : null,
-        );
-
-        return response || undefined;
-      };
       const action = async () => {
         const itemId = list?.[count];
         const item = data?.[itemId];
         if (!item?.url) return;
         // Get metadata
-        const metadata = await getLinkPreview(item?.url);
+        // @TODO Also use screenshot api service if no `image` returned: https://www.savepage.io/#pricing
+        const response = await fetchOpenGraphData(item?.url);
+        const metadata = response?.data;
         if (!metadata) return;
         // Add new item into state
         const newItem = { ...item, metadata };
@@ -73,13 +68,14 @@ export const useFetchCarousels = () => {
         state = newState;
         setState(newState);
       };
+      // Delay each request
       requestInterval = setInterval(() => {
         action();
         count += 1;
         if (count >= list.length) clearInterval(requestInterval);
       }, 1000);
     },
-    [fetchLinkMetaData],
+    [fetchOpenGraphData],
   );
 
   // Fetch data from browser's bookmarks db
