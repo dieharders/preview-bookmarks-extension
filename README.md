@@ -34,7 +34,7 @@ The build is minified and the filenames include the hashes.<br />
 
 See the section below about deploying your extension to Google Chrome.
 
-### Deploy Chrome Extension
+## Deploy Chrome Extension
 
 - Run `npm run build` in project directory.<br />
 - Go to `chrome://extensions/` in browser.<br />
