@@ -1,5 +1,5 @@
 import { Handler, HandlerResponse } from '@netlify/functions';
-import { fetchRequest } from 'utils/fetch';
+import { fetchRequest } from 'actions/fetch';
 
 export interface I_OpenGraphResponse {
   title: string;

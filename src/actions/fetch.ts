@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { useLinkPreviewAPI } from 'utils/useLinkPreviewAPI';
-import { useAPIs } from 'utils/useAPIs';
+import { useLinkPreviewAPI } from 'api/useLinkPreviewAPI';
+import { useAPIs } from 'api/useAPIs';
 import {
   I_BookmarkMetadataDict,
   I_BookmarkMetadataItem,

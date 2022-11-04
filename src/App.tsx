@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react';
 import { Card, ExpandableCard } from 'components/card/card';
-import { useFetchCarousels } from 'utils/fetch';
-import { useLinkPreviewAPI } from 'utils/useLinkPreviewAPI';
+import { useFetchCarousels } from 'actions/fetch';
+import { useLinkPreviewAPI } from 'api/useLinkPreviewAPI';
 import { I_OpenGraphResponse } from '../functions/fetchOpenGraphData';
 import styles from './App.module.scss';
 
