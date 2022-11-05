@@ -128,7 +128,6 @@ export const Descr = ({
   );
 };
 
-// @TODO Add description, label, favorited, type, url, icon, image preview effect on hover
 const Description = ({
   isOpen,
   description,

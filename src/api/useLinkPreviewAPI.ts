@@ -1,11 +1,14 @@
 import { useCallback } from 'react';
-import { I_OpenGraphResponseBody } from '../../functions/types';
+import {
+  I_OpenGraphResponseBody,
+  I_PageSnapshotResponseBody,
+} from '../../functions/types';
 
-// @TODO Also use screenshot api service if no `image` returned: https://www.savepage.io/#pricing
+// Endpoints start with "/api/"
+
 export const useLinkPreviewAPI = () => {
   const fetchOpenGraphData = useCallback(
     async (url: string): Promise<I_OpenGraphResponseBody | null> => {
-      // Endpoints start with "/api/"
       const options: RequestInit = {
         method: 'GET',
         cache: 'force-cache',
@@ -25,5 +28,24 @@ export const useLinkPreviewAPI = () => {
     [],
   );
 
-  return { fetchOpenGraphData };
+  const fetchPageSnapshot = useCallback(
+    async (url: string): Promise<I_PageSnapshotResponseBody | null> => {
+      const options: RequestInit = {
+        method: 'GET',
+        cache: 'force-cache',
+        headers: { 'Cache-Control': 'max-age=86400' },
+      };
+      return fetch(`/api/fetchPageSnapshot?url=${url}`, options)
+        .then((res) => {
+          return res.json();
+        })
+        .catch((err) => {
+          const error = err ? err.json() : null;
+          return error;
+        });
+    },
+    [],
+  );
+
+  return { fetchOpenGraphData, fetchPageSnapshot };
 };
