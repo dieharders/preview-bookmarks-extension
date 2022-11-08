@@ -1,7 +1,7 @@
 export interface I_OpenGraphResponse {
   title: string;
   description: string;
-  image: string;
+  image: string | undefined;
   url: string;
   error?: number;
 }
@@ -12,7 +12,7 @@ export interface I_OpenGraphResponseBody {
   error?: string;
 }
 
-export type T_PageSnapshotResponse = BlobPart;
+export type T_PageSnapshotResponse = string; // base64 string
 
 export interface I_PageSnapshotResponseBody {
   data?: T_PageSnapshotResponse;
