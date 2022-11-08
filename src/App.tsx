@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Card, ExpandableCard } from 'components/card/card';
+import { ExpandableCard } from 'components/card/card';
 import { useFetchCarousels } from 'hooks/fetch';
 import { I_OpenGraphResponse } from '../functions/types';
 import styles from './App.module.scss';
@@ -74,22 +74,6 @@ interface I_LocationState {
   location: string;
 }
 
-const defaultCardData = {
-  id: '0',
-  parentId: '0',
-  index: 0,
-  title: 'title',
-  url: 'localhost',
-  type: 'link',
-  metadata: {
-    title: 'Metadata Title',
-    description: 'This is default metadata description',
-    image: '',
-    url: '',
-  },
-  dateAdded: 0,
-};
-
 // Nav Constants
 const NAV_ROOT = '0';
 const defaultLocationState = {
@@ -119,9 +103,9 @@ const App = () => {
 
   const renderBookmarks = useCallback(() => {
     const onClick = (args: I_OnClick) => {
-      const { url, id, parentId } = args.item;
+      const { url, id, parentId, type } = args.item;
       // Go to folder location
-      if (!url) {
+      if (type === 'folder') {
         setPageLocation({
           pageName: args.shortTitle,
           parentLocation: parentId,
@@ -135,28 +119,17 @@ const App = () => {
     };
 
     const getFolderData = () => {
-      const item =
-        bookmarksMetadata?.[pageLocation.location]?.folder?.map(
-          (x) => bookmarksMetadata[x],
-        ) ?? [];
-
-      if (item.length === 0)
-        return [
-          defaultCardData,
-          { ...defaultCardData, id: '1' },
-          { ...defaultCardData, id: '2' },
-        ];
-      return item;
+      const data = bookmarksMetadata?.[pageLocation.location]?.folder?.map(
+        (x) => bookmarksMetadata[x],
+      );
+      return data || [];
     };
 
     const renderItems = (folder: I_BookmarkMetadataItem[]) => {
       return folder?.map((data) => {
         const isOther = data?.type === 'other';
         if (!data || isOther) return;
-        const oldCard = <Card key={data.id} data={data} onClick={onClick} />;
-        const newCard = <ExpandableCard key={data.id} data={data} onClick={onClick} />;
-
-        return newCard;
+        return <ExpandableCard key={data.id} data={data} onClick={onClick} />;
       });
     };
 
@@ -188,7 +161,7 @@ const App = () => {
           <NavButton
             onClick={() => {
               setPageLocation({
-                pageName: bookmarksMetadata[NAV_ROOT].title,
+                pageName: bookmarksMetadata?.[NAV_ROOT]?.title,
                 parentLocation: NAV_ROOT,
                 location: NAV_ROOT,
               });

@@ -128,7 +128,6 @@ export const Descr = ({
   );
 };
 
-// @TODO Add description, label, favorited, type, url, icon, image preview effect on hover
 const Description = ({
   isOpen,
   description,
@@ -243,12 +242,16 @@ export const ExpandableCard = ({
       onClick={() => {
         onClick({ item: data, shortTitle: `${data?.title}` });
       }}
-      outerContent={(isActive) => (
-        <>
-          <Title isActive={isActive}>{data?.title}</Title>
-          <Image data={data} />
-        </>
-      )}
+      outerContent={(isActive) => {
+        const title = isActive ? data?.metadata?.title : data?.title;
+
+        return (
+          <>
+            <Title isActive={isActive}>{title || 'title'}</Title>
+            <Image data={data} />
+          </>
+        );
+      }}
     >
       <Descr url={data?.url}>{data?.metadata?.description}</Descr>
     </Expandable>

@@ -1,29 +1,45 @@
 import { useCallback } from 'react';
-import { I_OpenGraphResponseBody } from '../../functions/types';
+import {
+  I_OpenGraphResponseBody,
+  I_PageSnapshotResponseBody,
+} from '../../functions/types';
 
-// @TODO Also use screenshot api service if no `image` returned: https://www.savepage.io/#pricing
+// Endpoints start with "/api/"
+
 export const useLinkPreviewAPI = () => {
   const fetchOpenGraphData = useCallback(
     async (url: string): Promise<I_OpenGraphResponseBody | null> => {
-      // Endpoints start with "/api/"
       const options: RequestInit = {
         method: 'GET',
         cache: 'force-cache',
         headers: { 'Cache-Control': 'max-age=86400' },
       };
       return fetch(`/api/fetchOpenGraphData?url=${url}`, options)
-        .then((res) => {
-          const empty = Object.keys(res).length <= 0;
-          const response = empty ? null : res.json();
-          return response;
-        })
+        .then((res) => res.json())
         .catch((err) => {
-          const error = err ? err.json() : null;
-          return error;
+          // console.log('fetchOpenGraphData error', err);
+          return err;
         });
     },
     [],
   );
 
-  return { fetchOpenGraphData };
+  const fetchPageSnapshot = useCallback(
+    async (url: string, format: string): Promise<I_PageSnapshotResponseBody | null> => {
+      const options: RequestInit = {
+        method: 'GET',
+        cache: 'force-cache',
+        headers: { 'Cache-Control': 'max-age=86400' },
+      };
+      return fetch(`/api/fetchPageSnapshot?url=${url}&format=${format}`, options)
+        .then((res) => res.json())
+        .catch((err) => {
+          // console.log('fetchPageSnapshot error', err);
+          return err;
+        });
+    },
+    [],
+  );
+
+  return { fetchOpenGraphData, fetchPageSnapshot };
 };
