@@ -103,7 +103,7 @@ const App = () => {
 
   const renderBookmarks = useCallback(() => {
     const onClick = (args: I_OnClick) => {
-      const { url, id, parentId, type } = args.item;
+      const { id, parentId, type } = args.item;
       // Go to folder location
       if (type === 'folder') {
         setPageLocation({
