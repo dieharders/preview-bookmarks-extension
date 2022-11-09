@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import {
   I_OpenGraphResponseBody,
   I_PageSnapshotResponseBody,
-} from '../../functions/types';
+} from 'functions-types/types';
 
 // Endpoints start with "/api/"
 

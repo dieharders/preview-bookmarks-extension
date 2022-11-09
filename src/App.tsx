@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { ExpandableCard } from 'components/card/card';
 import { useFetchCarousels } from 'hooks/fetch';
-import { I_OpenGraphResponse } from '../functions/types';
+import { I_OpenGraphResponse } from 'functions-types/types';
 import styles from './App.module.scss';
 
 // window object

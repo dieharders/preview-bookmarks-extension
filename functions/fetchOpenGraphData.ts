@@ -1,5 +1,5 @@
 import { Handler, HandlerResponse } from '@netlify/functions';
-import { I_OpenGraphResponse, I_OpenGraphResponseBody } from './types';
+import { I_OpenGraphResponse, I_OpenGraphResponseBody } from 'functions-types/types';
 import axios from 'axios';
 
 interface I_FetchReqProps {
