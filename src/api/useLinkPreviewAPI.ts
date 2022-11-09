@@ -1,8 +1,5 @@
 import { useCallback } from 'react';
-import {
-  I_OpenGraphResponseBody,
-  I_PageSnapshotResponseBody,
-} from 'functions-types/types';
+import { I_OpenGraphResponseBody, I_PageSnapshotResponseBody } from 'api/serverless';
 
 // Endpoints start with "/api/"
 
