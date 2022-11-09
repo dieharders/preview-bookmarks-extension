@@ -51,6 +51,12 @@ Follow these steps to add/deploy cloud functions using Netlify.
 - Rename `example.env` to `.env` and fill out values.
 - Be sure to deploy/mirror this file to Netlify.
 
+### Build & Deployment on Netlify
+
+- Under "Build and Deploy -> Continuous Deployment -> Build Settings"
+- Set `Build command` to `CI= npm run build` spacing must be exact!!!
+- Also make sure the env var `CI` is set to `false`
+
 ### Deploy functions to Netlify
 
 To add/replace functions, simply add a commit and push to your repo. Any changes will now be reflected in your Netlify dashboard.

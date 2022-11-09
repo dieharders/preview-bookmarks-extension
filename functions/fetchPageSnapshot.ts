@@ -1,5 +1,8 @@
 import { Handler, HandlerResponse } from '@netlify/functions';
-import { T_PageSnapshotResponse, I_PageSnapshotResponseBody } from './types';
+import {
+  T_PageSnapshotResponse,
+  I_PageSnapshotResponseBody,
+} from 'functions-types/types';
 import axios from 'axios';
 
 interface I_FetchReqProps {
