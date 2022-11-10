@@ -37,7 +37,8 @@ const fetchOpenGraphData: Handler = async (event, context): Promise<HandlerRespo
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTION',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Max-Age': 86400,
       },
       body: JSON.stringify(resultBody),
     };
