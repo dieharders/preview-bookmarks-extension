@@ -12,6 +12,7 @@ export const useLinkPreviewAPI = () => {
         cache: 'force-cache',
         headers: { 'Cache-Control': 'max-age=86400' },
       };
+      // @TODO Find a way to replace the BASE_URL with '' so local testing can work (or remove manually when testing)
       return fetch(`${BASE_URL}/api/fetchOpenGraphData?url=${url}`, options)
         .then((res) => res.json())
         .catch((err) => {
