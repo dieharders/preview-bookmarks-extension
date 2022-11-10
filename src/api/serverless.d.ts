@@ -1,3 +1,5 @@
+// These are the type defs for the backend serverless functions.
+
 export interface I_OpenGraphResponse {
   title: string;
   description: string;

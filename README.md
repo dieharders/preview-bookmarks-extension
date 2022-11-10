@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Preview Link Gallery
 
-A Chrome Extension to view, navigate and preview bookmarks
+A Chrome Extension to view, navigate and preview bookmarks using OpenGraph data.
 
 ## Where to find Webpack config
 
@@ -39,7 +39,7 @@ See the section below about deploying your extension to Google Chrome.
 - Run `npm run build` in project directory.<br />
 - Go to `chrome://extensions/` in browser.<br />
 - Turn on `developer mode` at top right.<br />
-- Click `Load unpacked` at left side and select your `dist` folder.<br />
+- Click `Load unpacked` at left side and select the `build` folder.<br />
 - Then go to `chrome://bookmarks/` in browser to view your extension.<br />
 
 ## Deploy Server-less Functions
