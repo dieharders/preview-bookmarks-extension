@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "bash ./script/build.sh",
+    "build": "bash ./script/build-extension.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "netlify": "./node_modules/.bin/netlify"
